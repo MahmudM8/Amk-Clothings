@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AMK CLOTHINGS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Base Styles (same as other pages) */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Cormorant Garamond', serif;
+            color: #000;
+            background-color: #fff;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            text-decoration: none;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            border: 1px solid #000;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background-color: #000;
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            background-color: transparent;
+            color: #000;
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: #000;
+        }
+
+        .btn-secondary:hover {
+            background-color: #000;
+            color: #fff;
+        }
+
+        /* Navigation (same as other pages) */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #fff;
+            padding: 20px 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            padding: 15px 0;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            font-weight: 700;
+            text-decoration: none;
+            color: #000;
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #000;
+            font-size: 16px;
+            font-weight: 500;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            background: #000;
+            bottom: -5px;
+            left: 0;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover:after {
+            width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        /* Collection Header */
+        .collection-header {
+            padding: 150px 0 60px;
+            text-align: center;
+            margin-top: 70px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .collection-header:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255,255,255,0.7);
+        }
+
+        .collection-header-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .collection-header h1 {
+            font-size: 48px;
+            margin-bottom: 15px;
+            letter-spacing: 2px;
+        }
+
+        .collection-header p {
+            font-size: 20px;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+
+        /* Collection Content */
+        .collection-description {
+            padding: 60px 0;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .collection-description p {
+            font-size: 18px;
+            line-height: 1.8;
+            margin-bottom: 30px;
+        }
+
+        /* Products Grid */
+        .collection-products {
+            padding: 40px 0 80px;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 40px;
+        }
+
+        .product-card {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-img {
+            width: 100%;
+            height: 380px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .product-card:hover .product-img {
+            transform: scale(1.03);
+        }
+
+        .product-info {
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        .product-title {
+            font-size: 18px;
+            margin-bottom: 8px;
+            letter-spacing: 0.5px;
+        }
+
+        .product-price {
+            font-weight: 500;
+            font-size: 16px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #fff;
+            padding: 60px 0 30px;
+            border-top: 1px solid #eee;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 40px;
+        }
+
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+
+        .footer-about {
+            width: 40%;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 60px;
+        }
+
+        .footer-links h3 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            text-decoration: none;
+            color: #000;
+            transition: all 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: #555;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            color: #000;
+            font-size: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid #eee;
+            font-size: 14px;
+            color: #777;
+        }
+
+        .logo {
+          display: flex;
+          align-items: center;
+          gap: 25px;
+          text-decoration: none;
+        }
+
+        .logo-img {
+          height: 100px; /* Adjust based on your logo */
+          width: auto;
+          filter: grayscale(100%) contrast(200%);
+        }
+
+        /* For mobile responsiveness */
+       @media (max-width: 768px) {
+         .logo-img {
+          height: 100px; }
+        
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero-title {
+                font-size: 80px;
+            }
+
+            .quick-links .container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-content {
+                flex-direction: column;
+            }
+
+            .footer-about {
+                width: 100%;
+                margin-bottom: 40px;
+            }
+
+            .footer-links {
+                justify-content: space-between;
+                gap: 30px;
+            }
+        }
+
+        /* Category-specific backgrounds */
+        .models-bg {
+            background-image: url('IMG_8470.jpg');
+        }
+
+        .caps-bg {
+            background-image: url('IMG_8502.jpg');
+        }
+
+        .kaftan-bg {
+            background-image: url('IMG_8483.jpg');
+        }
+
+        .jallabiya-bg {
+            background-image: url('IMG_8465.jpg');
+        }
+
+        .fabrics-bg {
+            background-image: url('IMG_8475.jpg');
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .products-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 30px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background-color: #fff;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 40px;
+                transition: all 0.5s ease;
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .products-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 25px;
+            }
+
+            .collection-header {
+                padding: 120px 0 50px;
+            }
+
+            .collection-header h1 {
+                font-size: 36px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .collection-header h1 {
+                font-size: 32px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">
+              <img src="logoamk.jpg" alt="AMK Logo" class="logo-img">
+              <span>AMK CLOTHINGS</span>
+            </a>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="#">Shop</a>
+                <a href="#">About</a>
+                <a href="#">Contact</a>
+            </div>
+            <div class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Collection Header -->
+    <section class="collection-header" id="category-bg">
+        <div class="container">
+            <div class="collection-header-content">
+                <h1 id="category-title">Collection</h1>
+                <p id="category-subtitle">Explore our curated selection</p>
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- Collection Description -->
+    <section class="collection-description">
+        <div class="container">
+            <p id="category-description">Each piece in this collection is carefully crafted to embody the essence of modern elegance.</p>
+        </div>
+    </section>
+
+    <!-- Collection Products -->
+    <section class="collection-products">
+        <div class="container">
+            <div class="products-grid" id="products-container">
+                <!-- Products will be loaded dynamically -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-about">
+                    <a href="index.html" class="logo">AMK</a>
+                    <p>Unleash your style, Unwrap Confidence. EST | 2022. Our collections embody sophistication and modern elegance.</p>
+                    <div class="social-links">
+                        <a href="https://www.instagram.com/amk_.clothings?igsh=ZHYyZW50YWE4NDhz"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <div>
+                        <h3>Shop</h3>
+                        <ul>
+                            <li><a href="collection.html?category=models">Models</a></li>
+                            <li><a href="collection.html?category=caps">Caps</a></li>
+                            <li><a href="collection.html?category=kaftan">Kaftan</a></li>
+                            <li><a href="collection.html?category=jallabiya">Jallabiya</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3>About</h3>
+                        <ul>
+                            <li><a href="about.html">Our Story</a></li>
+                            <li><a href="#">Designers</a></li>
+                            <li><a href="#">Sustainability</a></li>
+                            <li><a href="#">Careers</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3>Help</h3>
+                        <ul>
+                            <li><a href="#">FAQs</a></li>
+                            <li><a href="#">Shipping</a></li>
+                            <li><a href="#">Returns</a></li>
+                            <li><a href="tel:+2349160965516">Call Us: +234 9160965516</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+           <div class="copyright">
+                <p>&copy; 2025 AMK. All rights reserved.</p>
+                <P>designed by M8-Web Dev</P>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Get category from URL parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        const category = urlParams.get('category') || 'models';
+
+        // Category data with local images
+        const categories = {
+            models: {
+                title: "Model Collection",
+                subtitle: "Where culture meets elegance- Kaftan & Jallabiya edition.",
+                description: "Our model collection features sophisticated designs that blend contemporary style with timeless elegance. Each piece is crafted to perfection for the fashion-forward individual.",
+                products: [
+                    { name: "Royal Looks, timeless style", price: "", image: "IMG_8459.jpg" },
+                    { name: "Draped in heritage. Style for today", price: "", image: "IMG_8494.jpg" },
+                    { name: "Wearing Legacy", price: "", image: "IMG_8470.jpg" },
+                    { name: "Grace in every thread. Tradition redefind", price: "", image: "IMG_8490.jpg" }
+                ]
+            },
+            caps: {
+                title: "Caps Collection",
+                subtitle: "Statement headwear for every occasion",
+                description: "Our caps collection offers premium headwear.",
+                products: [
+                    { name: "Traditional Cap", price: "", image: "IMG_8508.jpg" },
+                    { name: "Heritage, pride, identity", price: "", image: "IMG_8472.jpg" },
+                    { name: "Elegance is in the details- and in the headwear", price: "", image: "IMG_8473.jpg" },
+                    
+                ]
+            },
+            kaftan: {
+                title: "Kaftan Collection",
+                subtitle: "Luxurious comfort meets elegant design",
+                description: "Our kaftan collection features flowing silhouettes crafted from premium fabrics. These versatile pieces are perfect for both relaxation and sophisticated occasions.",
+                products: [
+                    { name: "Epitome of sophitication and style", price: "", image: "IMG_8496.jpg" },
+                    { name: "Royal Blue dream in the softest, most luxitious fabric", price: "", image: "IMG_8461.jpg" },
+                    { name: "Your style is your signature", price: "", image: "IMG_8458.jpg" },
+                    
+                ]
+            },
+            jallabiya: {
+                title: "Jallabiya Collection",
+                subtitle: "Traditional elegance with modern sensibility",
+                description: "Our jallabiya collection honors cultural heritage while incorporating contemporary design elements. Each piece is crafted with attention to detail and premium fabrics.",
+                products: [
+                    { name: "Tradition never goes out of style", price: "", image: "IMG_8480.jpg" },
+                    { name: "Simple. Regal. Jallabiya", price: "", image: "IMG_8468.jpg" },
+                    { name: "From dusk to dawn, the Jallabiya speaks class", price: "", image: "IMG_8459.jpg" },
+                    
+                ]
+            },
+            fabrics: {
+                title: "Fabrics Collection",
+                subtitle: "Premium materials for discerning creators",
+                description: "Our fabrics collection offers the highest quality materials for designers and home sewists. Each textile is carefully selected for its drape, handfeel, and durability.",
+                products: [
+                    { name: "Your next masterpiece starts from the right fabric", price: "", image: "IMG_8477.jpg" },
+                    { name: "Woven with tradition", price: "", image: "IMG_8476.jpg" },
+                    { name: "Crafted for culture", price: "", image: "IMG_8478.jpg" },
+                    
+                ]
+            }
+        };
+
+        // Load category content
+        function loadCategory() {
+            const categoryData = categories[category];
+            
+            // Set page title
+            document.title = `AMK | ${categoryData.title}`;
+            
+            // Update header
+            document.getElementById('category-title').textContent = categoryData.title;
+            document.getElementById('category-subtitle').textContent = categoryData.subtitle;
+            document.getElementById('category-description').textContent = categoryData.description;
+            
+            // Set background class
+            document.getElementById('category-bg').classList.add(`${category}-bg`);
+            
+            // Load products
+            const productsContainer = document.getElementById('products-container');
+            productsContainer.innerHTML = '';
+            
+            categoryData.products.forEach(product => {
+                const productCard = document.createElement('div');
+                productCard.className = 'product-card';
+                productCard.innerHTML = `
+                    <img src="${product.image}" alt="${product.name}" class="product-img">
+                    <div class="product-info">
+                        <h3 class="product-title">${product.name}</h3>
+                        <p class="product-price">${product.price}</p>
+                    </div>
+                `;
+                productsContainer.appendChild(productCard);
+            });
+        }
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', loadCategory);
+    </script>
+</body>
+</html>
